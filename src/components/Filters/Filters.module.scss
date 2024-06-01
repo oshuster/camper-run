@@ -1,0 +1,39 @@
+.filterWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-right: 32px;
+}
+
+.filterGrid {
+    display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.subTitle {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: rgba(16, 24, 40, 0.6);
+    margin-bottom: 8px;
+}
+
+.input {
+    border-radius: 10px;
+    padding: 18px 218px 18px 18px;
+    width: 360px;
+    height: 56px;
+    background-color: #F7F7F7;
+    margin-bottom: 32px;
+}
+
+.title {
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+
+}

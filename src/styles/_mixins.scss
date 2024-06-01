@@ -1,0 +1,130 @@
+@import './breakpoints';
+
+@mixin media-rules($screen) {
+  @if $screen == tablet {
+    @media screen and (min-width: $tablet) {
+      @content;
+    }
+  } @else if $screen == desktop {
+    @media screen and (min-width: $desktop) {
+      @content;
+    }
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+//usage
+// .main-dashboard {
+//   @include responsive-scroll(width, height);
+// }
+//цей не перевірений
+@mixin responsive-scroll($column-width, $column-height) {
+  $screen-width: 100vw;
+  $screen-height: 100vh;
+
+  $should-add-horizontal-scroll: $column-width > $screen-width;
+  $should-add-vertical-scroll: $column-height > $screen-height;
+
+  @media (min-width: #{$screen-width}) {
+    body {
+      overflow-x: auto;
+    }
+  }
+
+  @media (min-height: #{$screen-height}) {
+    .column {
+      overflow-y: auto;
+    }
+  }
+}
+
+@mixin appear-animation($duration: 0.25s) {
+  animation: appear $duration ease forwards;
+
+  @keyframes appear {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+@mixin appear-animation-opacity($duration: 0.25s) {
+  animation: appear $duration ease forwards;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin disappear-animation-opacity($duration: 0.25s) {
+  animation: disappear $duration ease forwards;
+
+  @keyframes disappear {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+@mixin disappear-animation($duration: 0.25s) {
+  animation: disappear $duration ease forwards;
+
+  @keyframes disappear {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+  display: none;
+}
+
+@mixin twoLineText {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin light($color, $height) {
+  position: absolute;
+  border-radius: 10px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $height;
+  background-color: $color;
+  opacity: 0.12;
+  filter: blur(3px);
+
+  transition: background-color 250ms ease-in-out;
+}
