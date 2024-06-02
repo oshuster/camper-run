@@ -1,3 +1,5 @@
+import css from './FavoritesPage.module.scss';
+
 export const FavoritesPage = () => {
-  return <div>FavoritesPage</div>;
+  return <div className={css.wrapper}></div>;
 };
