@@ -1,0 +1,65 @@
+.modalBody {
+    border-radius: 20px;
+    padding: 40px;
+    width: 1300px !important;
+    height: 1288px;
+    background-color: rgba(255, 0, 0, 0.158);
+}
+
+.imgWrapper {
+    display: inline-flex;
+    flex-direction: row;
+
+}
+
+.img {
+    display: block;
+    border-radius: 10px;
+    width: 290px;
+    height: 310px;
+    margin-right: 16px;
+    margin-bottom: 32px;
+    object-fit: cover;
+
+}
+
+.title {
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 125%;
+    margin-bottom: 10px;
+
+}
+
+.reviewWraper,
+.link {
+    display: inline-flex;
+    align-items: baseline;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    margin-bottom: 10px;
+}
+
+.link {
+    margin-right: 8px;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+
+}
+
+.tabTitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.tablistWrapper {
+    border-bottom: 1px solid rgba(16, 24, 40, 0.2);
+}

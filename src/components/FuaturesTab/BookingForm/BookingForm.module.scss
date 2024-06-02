@@ -1,0 +1,34 @@
+.formContainer {
+    border: 1px solid #10182833;
+    border-radius: 10px;
+    padding: 24px;
+    width: 448px;
+    height: 548px;
+
+}
+
+.formTitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    margin-bottom: 8px;
+}
+
+.formSubTitle {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 150%;
+    margin-bottom: 24px;
+}
+
+.formLabel_hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
