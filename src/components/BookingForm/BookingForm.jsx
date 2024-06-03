@@ -13,9 +13,11 @@ import { useForm, Controller } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import css from './BookingForm.module.scss';
-import svg from '../../../assets/sprite.svg';
+import svg from '../../assets/sprite.svg';
 import { forwardRef } from 'react';
-import { Button } from '../../Button/Button';
+import { Button } from '../Buttons/MainBtn/Button';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from '../../schemas/bookingSchema';
 
 export const BookingForm = () => {
   const {
@@ -23,7 +25,10 @@ export const BookingForm = () => {
     control,
     register,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const CustomInput = forwardRef((props, ref) => (
     <InputGroup>
@@ -42,9 +47,11 @@ export const BookingForm = () => {
     </InputGroup>
   ));
 
+  CustomInput.displayName = 'CustomInput';
+
   const onSubmit = (data) => {
     console.log(data);
-    // Add your form submission logic here
+    reset();
   };
 
   return (
@@ -53,9 +60,9 @@ export const BookingForm = () => {
       <p className={css.formSubTitle}>
         Stay connected! We are always ready to help you.
       </p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing={4} align="stretch">
-          <FormControl id="name" isRequired>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <VStack spacing={5} align="stretch">
+          <FormControl id="name">
             <FormLabel className={css.formLabel_hidden}>Name</FormLabel>
             <Input
               bg="#F2F4F7"
@@ -63,9 +70,9 @@ export const BookingForm = () => {
               placeholder="Name"
               {...register('name', { required: true })}
             />
-            {errors.name && <Text color="red.500">This field is required</Text>}
+            {errors.name && <Text color="red.500">{errors.name.message}</Text>}
           </FormControl>
-          <FormControl id="email" isRequired>
+          <FormControl id="email">
             <FormLabel className={css.formLabel_hidden}>Email</FormLabel>
             <Input
               bg="#F2F4F7"
@@ -75,10 +82,10 @@ export const BookingForm = () => {
               {...register('email', { required: true })}
             />
             {errors.email && (
-              <Text color="red.500">This field is required</Text>
+              <Text color="red.500">{errors.email.message}</Text>
             )}
           </FormControl>
-          <FormControl id="bookingDate" isRequired>
+          <FormControl id="bookingDate">
             <FormLabel className={css.formLabel_hidden}>Booking date</FormLabel>
             <Controller
               name="bookingDate"

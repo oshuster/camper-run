@@ -1,36 +1,26 @@
 import { Icon, Text, IconButton } from '@chakra-ui/react';
-import { Button } from '../Buttons/MainBtn/Button';
-import { CategoryBage } from '../CategoryBage/CategoryBage';
-import css from './CamperCard.module.scss';
+import { Button } from '../../Buttons/MainBtn/Button';
+import { CategoryBage } from '../../CategoryBage/CategoryBage';
+import css from './FavoriteCard.module.scss';
 import { FaStar } from 'react-icons/fa';
-import { GrLocation } from 'react-icons/gr';
+import { GrClose, GrLocation } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
-import svg from '../../assets/sprite.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite, getOne } from '../../redux/adverts/advertsOperations';
-import { selectFavorite } from '../../redux/adverts/advertsSelectors';
-import { removeFavorite } from '../../redux/adverts/advertsSlice';
 
-export const CamperCard = ({ data }) => {
+import { useDispatch } from 'react-redux';
+import { getOne } from '../../../redux/adverts/advertsOperations';
+import { removeFavorite } from '../../../redux/adverts/advertsSlice';
+
+export const FavoriteCard = ({ data }) => {
   const dispatch = useDispatch();
-  const favoriteAdv = useSelector(selectFavorite);
 
   const showModal = (e) => {
     const id = e.target.closest('[data-id]').dataset.id;
     dispatch(getOne(id));
   };
 
-  const handleFavorite = (e) => {
+  const handleRemoveFavorite = (e) => {
     const id = e.target.closest('[data-id]').dataset.id;
-    if (isFav(favoriteAdv, id)) {
-      dispatch(removeFavorite(id));
-    } else {
-      dispatch(addFavorite(id));
-    }
-  };
-
-  const isFav = (favoriteAdv, elementId) => {
-    return favoriteAdv?.some(({ _id }) => _id === elementId);
+    dispatch(removeFavorite(id));
   };
 
   return (
@@ -41,25 +31,14 @@ export const CamperCard = ({ data }) => {
           <h4>{data.name}</h4>
           <p>€{data.price.toFixed(2)}</p>
           <IconButton
-            onClick={handleFavorite}
+            onClick={handleRemoveFavorite}
             className={css.favoriteBtn}
             colorScheme="transparent"
             aria-label="Add to favorite"
-            icon={
-              <svg width="18px" height="18px">
-                {/* <use xlinkHref={`${svg}#heart_fill`} /> */}
-                <use
-                  xlinkHref={
-                    isFav(favoriteAdv, data._id)
-                      ? `${svg}#heart_fill`
-                      : `${svg}#heart_no_fill`
-                  }
-                />
-              </svg>
-            }
+            color="black"
+            icon={<GrClose />}
           />
         </div>
-
         <div className={css.reviewWraper}>
           <Link className={css.link}>
             <Icon as={FaStar} color="yellow.500" width="16px" height="16px" />

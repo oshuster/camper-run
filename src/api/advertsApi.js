@@ -1,18 +1,20 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = 'https://6659b114de346625136d8a21.mockapi.io/api';
+
+const LIMIT = 4;
 
 const instance = axios.create({
   baseURL: BASE_URL,
   timeout: 15000,
 });
 
-export const getAllAdverts = async () => {
-  const response = await instance.get('/adverts');
-  return response;
+export const getAllAdverts = async (page) => {
+  const { data } = await instance.get(`/adverts?page=${page}&limit=${LIMIT}`);
+  return data;
 };
 
 export const getAdvertById = async (id) => {
-  const response = await instance.get(`/adverts/${id}`);
-  return response;
+  const { data } = await instance.get(`/adverts/${id}`);
+  return data;
 };

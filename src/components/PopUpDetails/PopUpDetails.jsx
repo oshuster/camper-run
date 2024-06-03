@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import css from './PopUpDetails.module.scss';
-import svg from '../../assets/sprite.svg';
 
 import {
   Modal,
@@ -8,7 +7,6 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   Icon,
   Text,
   Tabs,
@@ -17,19 +15,20 @@ import {
   Tab,
   TabPanel,
   TabIndicator,
-  Divider,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import { GrLocation } from 'react-icons/gr';
 import { FuaturesTab } from '../FuaturesTab/FuaturesTab';
 import { ReviewsTab } from '../ReviewsTab/ReviewsTab';
+import { useSelector } from 'react-redux';
+import { selectAditionalInfo } from '../../redux/adverts/advertsSelectors';
+import { nanoid } from 'nanoid';
 
-export const PopUpDetails = ({ data }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const testOpen = true;
+export const PopUpDetails = ({ isOpen, onClose }) => {
+  const data = useSelector(selectAditionalInfo);
 
   return (
-    <Modal isOpen={testOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent maxW="1100px" p="40px">
         <ModalCloseButton />
@@ -47,9 +46,14 @@ export const PopUpDetails = ({ data }) => {
           </div>
           <p className={css.title}>€{data.price.toFixed(2)}</p>
           <div className={css.imgWrapper}>
-            <img src={data.gallery[0]} alt={data.name} className={css.img} />
-            <img src={data.gallery[1]} alt={data.name} className={css.img} />
-            <img src={data.gallery[2]} alt={data.name} className={css.img} />
+            {data?.gallery.map((imgUrl) => (
+              <img
+                key={nanoid()}
+                src={imgUrl}
+                alt={data.name}
+                className={css.img}
+              />
+            ))}
           </div>
           <Text className={css.description}>{data.description}</Text>
           <Tabs position="relative" variant="unstyled" mt="28px">
@@ -67,7 +71,7 @@ export const PopUpDetails = ({ data }) => {
               <TabPanel p="0">
                 <FuaturesTab />
               </TabPanel>
-              <TabPanel>
+              <TabPanel p="0">
                 <ReviewsTab />
               </TabPanel>
             </TabPanels>

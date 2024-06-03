@@ -27,7 +27,7 @@ export const Header = () => {
         />
         <Box>
           <Link as={RouterNavLink} to="/" _hover={{ textDecoration: 'none' }}>
-            <Text fontSize="2xl" fontWeight="bold" color="red.500">
+            <Text fontSize="3xl" fontWeight="bold" color="red.500">
               camper
               <span style={{ fontWeight: 'normal' }}>run</span>
             </Text>
@@ -47,6 +47,7 @@ export const Header = () => {
             px={2}
             py={1}
             rounded={'md'}
+            fontSize="xl"
             _hover={{ textDecoration: 'none', color: '#d84343' }}
             _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
           >
@@ -58,6 +59,7 @@ export const Header = () => {
             px={2}
             py={1}
             rounded={'md'}
+            fontSize="xl"
             _hover={{ textDecoration: 'none', color: 'gray.700' }}
             _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
           >
@@ -69,6 +71,7 @@ export const Header = () => {
             px={2}
             py={1}
             rounded={'md'}
+            fontSize="xl"
             _hover={{ textDecoration: 'none', color: 'gray.700' }}
             _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
           >
