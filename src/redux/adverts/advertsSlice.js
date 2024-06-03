@@ -7,6 +7,9 @@ const advertsSlice = createSlice({
   name: 'adverts',
   initialState,
   reducers: {
+    updatePage(state) {
+      state.page = state.page + 1;
+    },
     // setTheme(state) {
     //   state.user.theme = 'dark';
     // },
@@ -24,13 +27,17 @@ const advertsSlice = createSlice({
       //getAllAdverts
       .addCase(getAdverts.pending, handlePending)
       .addCase(getAdverts.fulfilled, (state, { payload }) => {
-        state.adverts = [];
+        console.log('payload', payload);
+        // state.campers = state.campers.adverts.push(payload);
+        state.campers.push(...payload);
         state.favoriteAdverts = [];
-        state.isLogin = true;
         state.error = null;
+        state.isLoading = false;
       })
       .addCase(getAdverts.rejected, handleRejected);
   },
 });
+
+export const { updatePage } = advertsSlice.actions;
 
 export const advertReducer = advertsSlice.reducer;

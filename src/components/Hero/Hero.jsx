@@ -1,6 +1,6 @@
 import { Box, Heading, Highlight } from '@chakra-ui/react';
 import heroImage from '../../assets/hero/hero.webp';
-import { Button } from '../Button/Button';
+import { Button } from '../Buttons/MainBtn/Button';
 import { useNavigate } from 'react-router-dom';
 
 export const Hero = () => {

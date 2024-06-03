@@ -1,5 +1,7 @@
 export const initialState = {
-  adverts: [],
+  campers: [],
+  page: 1,
   favoriteAdverts: [],
+  isLoading: false,
   error: null,
 };

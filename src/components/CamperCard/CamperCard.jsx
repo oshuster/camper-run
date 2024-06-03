@@ -1,5 +1,5 @@
 import { Icon, Text, IconButton } from '@chakra-ui/react';
-import { Button } from '../Button/Button';
+import { Button } from '../Buttons/MainBtn/Button';
 import { CategoryBage } from '../CategoryBage/CategoryBage';
 import css from './CamperCard.module.scss';
 import { FaStar } from 'react-icons/fa';

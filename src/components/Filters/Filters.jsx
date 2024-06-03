@@ -1,4 +1,4 @@
-import { Button } from '../Button/Button';
+import { Button } from '../Buttons/MainBtn/Button';
 import css from './Filters.module.scss';
 import { useState } from 'react';
 import { FilterButton } from '../FilterButton/FilterButton';
