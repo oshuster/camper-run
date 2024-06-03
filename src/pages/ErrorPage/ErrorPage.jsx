@@ -17,7 +17,8 @@ export const ErrorPage = () => {
       <Button
         as={Link}
         to="/"
-        colorScheme="teal"
+        color="#e44848"
+        borderColor="#e44848"
         variant="outline"
         textDecoration="none"
       >

@@ -1,0 +1,58 @@
+.cardWrapper {
+    display: inline-flex;
+    border: 1px solid rgba(16, 24, 40, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+    // width: 888px;
+    // height: 358px;
+    margin-bottom: 32px;
+}
+
+.additionalInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardImg {
+    margin-right: 24px;
+    border-radius: 10px;
+    width: 290px;
+    height: 310px;
+    object-fit: cover;
+}
+
+.mainInfo {
+    display: flex;
+    justify-content: space-between;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 125%;
+
+}
+
+.reviewWraper,
+.link {
+    display: inline-flex;
+    align-items: baseline;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.link {
+    margin-right: 8px;
+}
+
+.description {
+    color: #475467;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.favoriteBtn {
+    color: transparent;
+}

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAdverts } from './advertsOperations';
+import { getAdverts, getOne, addFavorite } from './advertsOperations';
 import { initialState } from './advertsInitialState';
 import { handlePending, handleRejected } from './advertsHandlers';
 
@@ -7,37 +7,61 @@ const advertsSlice = createSlice({
   name: 'adverts',
   initialState,
   reducers: {
-    updatePage(state) {
-      state.page = state.page + 1;
+    updatePage(state, { payload }) {
+      state.page = payload;
     },
-    // setTheme(state) {
-    //   state.user.theme = 'dark';
-    // },
-    // setTokenToRedux(state, action) {
-    //   state.token = action.payload;
-    //   state.isLogin = true;
-    //   state.isLoading = false;
-    // },
-    // clearTokenToRedux(state) {
-    //   state.token = null;
-    // },
+    clearAdverts(state) {
+      state.campers = [];
+      state.page = 1;
+    },
+    updateModalState(state, { payload }) {
+      state.isOpen = payload;
+    },
+    updateShowLoadMore(state, { payload }) {
+      state.isShowLoadMore = payload;
+    },
+    removeFavorite(state, { payload }) {
+      state.favoriteAdverts = state.favoriteAdverts.filter(
+        (advert) => advert._id !== payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
       //getAllAdverts
       .addCase(getAdverts.pending, handlePending)
       .addCase(getAdverts.fulfilled, (state, { payload }) => {
-        console.log('payload', payload);
-        // state.campers = state.campers.adverts.push(payload);
-        state.campers.push(...payload);
-        state.favoriteAdverts = [];
+        state.campers = [...state.campers, ...payload];
         state.error = null;
         state.isLoading = false;
       })
-      .addCase(getAdverts.rejected, handleRejected);
+      .addCase(getAdverts.rejected, handleRejected)
+      //getOne
+      .addCase(getOne.pending, handlePending)
+      .addCase(getOne.fulfilled, (state, { payload }) => {
+        state.aditionalInfo = payload;
+        state.isOpen = true;
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(getOne.rejected, handleRejected)
+      //addFavorite
+      .addCase(addFavorite.pending, handlePending)
+      .addCase(addFavorite.fulfilled, (state, { payload }) => {
+        state.favoriteAdverts = [...state.favoriteAdverts, payload];
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(addFavorite.rejected, handleRejected);
   },
 });
 
-export const { updatePage } = advertsSlice.actions;
+export const {
+  updatePage,
+  clearAdverts,
+  updateModalState,
+  updateShowLoadMore,
+  removeFavorite,
+} = advertsSlice.actions;
 
 export const advertReducer = advertsSlice.reducer;

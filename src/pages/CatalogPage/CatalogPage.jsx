@@ -1,41 +1,38 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { CamperList } from '../../components/CamperList/CamperList';
 import { Filters } from '../../components/Filters/Filters';
 import css from './CatalogPage.module.scss';
-import { getAdverts } from '../../redux/adverts/advertsOperations';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectAllAdverts,
-  selectIsLoading,
-  selectPage,
-} from '../../redux/adverts/advertsSelectors';
-import Loader from '../../components/Loader/Loader';
-import { LoadMoreBtn } from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
-import { updatePage } from '../../redux/adverts/advertsSlice';
+  clearAdverts,
+  updateModalState,
+  updateShowLoadMore,
+} from '../../redux/adverts/advertsSlice';
+import { PopUpDetails } from '../../components/PopUpDetails/PopUpDetails';
+import { selectIsOpen } from '../../redux/adverts/advertsSelectors';
 
 export const CatalogPage = () => {
-  const adverts = useSelector(selectAllAdverts);
-  const isLoading = useSelector(selectIsLoading);
-  const page = useSelector(selectPage);
-
   const dispatch = useDispatch();
+  const open = useSelector(selectIsOpen);
 
   useEffect(() => {
-    dispatch(getAdverts(page));
-  }, [dispatch, page]);
+    return () => {
+      dispatch(clearAdverts());
+      dispatch(updateShowLoadMore(true));
+    };
+  }, [dispatch]);
 
-  const loadMore = () => {
-    dispatch(updatePage());
-    console.log('updated page', page);
-    dispatch(getAdverts(page));
+  const closeModal = () => {
+    dispatch(updateModalState(false));
   };
 
   return (
     <div className={css.wrapper}>
-      <Filters />
-      {isLoading && <Loader />}
-      {!isLoading && <CamperList data={adverts} />}
-      <LoadMoreBtn onClick={loadMore} />
+      {open && <PopUpDetails isOpen={open} onClose={closeModal} />}
+      <div>
+        <Filters />
+      </div>
+      <CamperList />
     </div>
   );
 };

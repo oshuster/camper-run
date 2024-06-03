@@ -16,11 +16,13 @@
     "@date-js/date-formatter": "^1.1.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.4.2",
     "@reduxjs/toolkit": "^2.2.5",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.10",
     "modern-normalize": "^2.0.0",
+    "nanoid": "^5.0.7",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-datepicker": "^6.9.0",
@@ -35,7 +37,8 @@
     "sass": "^1.77.4",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.7",
-    "vite-plugin-svgr": "^3.2.0"
+    "vite-plugin-svgr": "^3.2.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",

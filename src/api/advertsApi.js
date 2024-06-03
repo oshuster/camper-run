@@ -15,6 +15,6 @@ export const getAllAdverts = async (page) => {
 };
 
 export const getAdvertById = async (id) => {
-  const response = await instance.get(`/adverts/${id}`);
-  return response;
+  const { data } = await instance.get(`/adverts/${id}`);
+  return data;
 };

@@ -34,6 +34,11 @@ export const Filters = () => {
     setSelectedVehicleType(label);
   };
 
+  const handleSearch = () => {
+    console.log('Equipment', selectedEquipment);
+    console.log('Type', selectedVehicleType);
+  };
+
   return (
     <div className={css.filterWrapper}>
       <p className={css.subTitle}>Location</p>
@@ -66,7 +71,7 @@ export const Filters = () => {
         ))}
       </div>
 
-      <Button>Search</Button>
+      <Button onClick={handleSearch}>Search</Button>
     </div>
   );
 };
