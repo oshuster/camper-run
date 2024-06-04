@@ -48,7 +48,7 @@ export const FavoriteCard = ({ data }) => {
           <Icon as={GrLocation} width="16px" height="16px" />
           <p>{data.location}</p>
         </div>
-        <Text className={css.description} noOfLines="1">
+        <Text className={css.description} noOfLines="3">
           {data.description}
         </Text>
         <div>

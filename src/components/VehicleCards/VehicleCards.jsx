@@ -13,11 +13,12 @@ import coachbuilt from '../../assets/campers/coachbuilt.webp';
 import lowProfile from '../../assets/campers/low-profile.webp';
 import van from '../../assets/campers/van.webp';
 import vwT6 from '../../assets/campers/vw-t6.webp';
+import css from './VehicleCards.module.scss';
 
 export const VehicleCards = () => {
   return (
-    <Box display="flex" bg="grey">
-      <Card maxW="sm">
+    <Box className={css.vehicleWraper} p="0 10px 0 20px">
+      <Card maxW="sm" mr="15px">
         <CardBody>
           <Image src={aClass} alt="A-Class Campervan" borderRadius="lg" />
           <Stack mt="6" spacing="3">
@@ -31,7 +32,7 @@ export const VehicleCards = () => {
         </CardBody>
         <Divider />
       </Card>
-      <Card maxW="sm">
+      <Card maxW="sm" mr="15px" pt="25px">
         <CardBody>
           <Image
             src={coachbuilt}
@@ -49,7 +50,7 @@ export const VehicleCards = () => {
         </CardBody>
         <Divider />
       </Card>
-      <Card maxW="sm">
+      <Card maxW="sm" mr="15px" pt="30px">
         <CardBody>
           <Image
             src={lowProfile}
@@ -66,7 +67,7 @@ export const VehicleCards = () => {
         </CardBody>
         <Divider />
       </Card>
-      <Card maxW="sm">
+      <Card maxW="sm" mr="15px">
         <CardBody>
           <Image src={van} alt="Van Conversion Campervan" borderRadius="lg" />
           <Stack mt="6" spacing="3">
@@ -80,7 +81,7 @@ export const VehicleCards = () => {
         </CardBody>
         <Divider />
       </Card>
-      <Card maxW="sm">
+      <Card maxW="sm" mr="15px" pt="25px">
         <CardBody>
           <Image src={vwT6} alt="VW T6 Campervan" borderRadius="lg" />
           <Stack mt="6" spacing="3">
