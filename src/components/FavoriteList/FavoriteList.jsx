@@ -6,14 +6,15 @@ import {
 } from '../../redux/adverts/advertsSelectors';
 import Loader from '../Loader/Loader';
 import { FavoriteCard } from './FavoriteCard/FavoriteCard';
+import { NothingFound } from '../NothingFound/NothingFound';
 
 export const FavoriteList = () => {
   const favoriteAdv = useSelector(selectFavorite);
   const isLoading = useSelector(selectIsLoading);
 
   return (
-    <div className={css.advertsWrapper}>
-      {favoriteAdv.length === 0 && <h3>Empty</h3>}
+    <div className={css.favoriteListWrapper}>
+      {favoriteAdv.length === 0 && <NothingFound />}
       <ul>
         {favoriteAdv?.map((item) => (
           <FavoriteCard data={item} key={item._id} />

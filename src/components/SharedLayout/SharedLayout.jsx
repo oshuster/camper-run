@@ -6,13 +6,15 @@ import { Fotter } from '../Fotter/Fotter';
 
 const SharedLayout = () => {
   return (
-    <Box height="100%">
-      <Header />
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
+    <>
+      <Box height="100%">
+        <Header />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </Box>
       <Fotter />
-    </Box>
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import css from './CamperList.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { CamperCard } from '../CamperCard/CamperCard';
 import {
-  selectAllAdverts,
   selectFilteredAdverts,
   selectIsLoading,
   selectIsShowLoadMore,
@@ -13,9 +12,9 @@ import { updatePage } from '../../redux/adverts/advertsSlice';
 import { LoadMoreBtn } from '../Buttons/LoadMoreBtn/LoadMoreBtn';
 import { useEffect } from 'react';
 import Loader from '../Loader/Loader';
+import { NothingFound } from '../NothingFound/NothingFound';
 
 export const CamperList = () => {
-  // const adverts = useSelector(selectAllAdverts);
   const adverts = useSelector(selectFilteredAdverts);
   const page = useSelector(selectPage);
   const isLoading = useSelector(selectIsLoading);
@@ -40,8 +39,11 @@ export const CamperList = () => {
           <CamperCard data={item} key={item._id} />
         ))}
       </ul>
+      {!adverts.length && !isLoading && <NothingFound />}
       {isLoading && <Loader />}
-      {showLoadMore && !isLoading && <LoadMoreBtn onClick={loadMore} />}
+      {showLoadMore && !isLoading && !!adverts.length && (
+        <LoadMoreBtn onClick={loadMore} />
+      )}
     </div>
   );
 };

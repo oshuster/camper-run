@@ -9,12 +9,17 @@ const instance = axios.create({
   timeout: 15000,
 });
 
-export const getAllAdverts = async (page) => {
+export const getPartialAdverts = async (page) => {
   const { data } = await instance.get(`/adverts?page=${page}&limit=${LIMIT}`);
   return data;
 };
 
 export const getAdvertById = async (id) => {
   const { data } = await instance.get(`/adverts/${id}`);
+  return data;
+};
+
+export const getAdvertsAll = async () => {
+  const { data } = await instance.get(`/adverts`);
   return data;
 };

@@ -14,9 +14,8 @@ export const FavoritesPage = () => {
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={css.favoriteWrapper}>
       {open && <PopUpDetails isOpen={open} onClose={closeModal} />}
-
       <FavoriteList />
     </div>
   );

@@ -10,12 +10,15 @@ import {
 } from '../../redux/adverts/advertsSlice';
 import { PopUpDetails } from '../../components/PopUpDetails/PopUpDetails';
 import { selectIsOpen } from '../../redux/adverts/advertsSelectors';
+import { getAll } from '../../redux/adverts/advertsOperations';
 
 export const CatalogPage = () => {
   const dispatch = useDispatch();
   const open = useSelector(selectIsOpen);
 
   useEffect(() => {
+    dispatch(getAll());
+
     return () => {
       dispatch(clearAdverts());
       dispatch(updateShowLoadMore(true));

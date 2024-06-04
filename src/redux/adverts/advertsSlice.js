@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAdverts, getOne, addFavorite } from './advertsOperations';
+import { getAdverts, getOne, addFavorite, getAll } from './advertsOperations';
 import { initialState } from './advertsInitialState';
 import { handlePending, handleRejected } from './advertsHandlers';
 
@@ -31,10 +31,18 @@ const advertsSlice = createSlice({
     updateFilterVehicleType(state, { payload }) {
       state.filterVehicleType = payload;
     },
+    updateFilterLocation(state, { payload }) {
+      state.filterLocation = payload;
+    },
+    clearStateFilters(state) {
+      state.filterEquipment = [];
+      state.filterVehicleType = '';
+      state.filterLocation = '';
+    },
   },
   extraReducers: (builder) => {
     builder
-      //getAllAdverts
+      //getPartialAdverts
       .addCase(getAdverts.pending, handlePending)
       .addCase(getAdverts.fulfilled, (state, { payload }) => {
         state.campers = [...state.campers, ...payload];
@@ -58,7 +66,15 @@ const advertsSlice = createSlice({
         state.error = null;
         state.isLoading = false;
       })
-      .addCase(addFavorite.rejected, handleRejected);
+      .addCase(addFavorite.rejected, handleRejected)
+      //getAll
+      .addCase(getAll.pending, handlePending)
+      .addCase(getAll.fulfilled, (state, { payload }) => {
+        state.advertsAll = [...state.advertsAll, ...payload];
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(getAll.rejected, handleRejected);
   },
 });
 
@@ -70,6 +86,8 @@ export const {
   removeFavorite,
   updateFilterVehicleType,
   updateFilterEquipment,
+  updateFilterLocation,
+  clearStateFilters,
 } = advertsSlice.actions;
 
 export const advertReducer = advertsSlice.reducer;

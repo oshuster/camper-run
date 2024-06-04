@@ -2,45 +2,83 @@ import { Button } from '../Buttons/MainBtn/Button';
 import css from './Filters.module.scss';
 import { useState } from 'react';
 import { FilterButton } from '../FilterButton/FilterButton';
-import { Divider } from '@chakra-ui/react';
+import { Divider, Icon, IconButton, Select } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  clearStateFilters,
   updateFilterEquipment,
+  updateFilterLocation,
   updateFilterVehicleType,
 } from '../../redux/adverts/advertsSlice';
 import { selectFilteredAdverts } from '../../redux/adverts/advertsSelectors';
-import { equipmentOptions, vehicleTypeOptions } from './options';
+import {
+  equipmentOptions,
+  vehicleTypeOptions,
+  locationOptions,
+} from './options';
+import { GrLocation } from 'react-icons/gr';
+import { LuFilterX } from 'react-icons/lu';
+import { nanoid } from 'nanoid';
 
 export const Filters = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([]);
   const [selectedVehicleType, setSelectedVehicleType] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
   const dispatch = useDispatch();
   const filteredAdverts = useSelector(selectFilteredAdverts);
   console.log('filteredAdverts >>>', filteredAdverts);
 
-  const toggleEquipment = (label) => {
+  const toggleEquipment = (e) => {
+    const id = e.target.closest('[data-id]').dataset.id;
+    console.log(id);
     setSelectedEquipment((prevSelected) =>
-      prevSelected.includes(label)
-        ? prevSelected.filter((item) => item !== label)
-        : [...prevSelected, label]
+      prevSelected.includes(id)
+        ? prevSelected.filter((item) => item !== id)
+        : [...prevSelected, id]
     );
   };
 
-  const toggleVehicleType = (label) => {
-    setSelectedVehicleType(label);
+  const toggleVehicleType = (e) => {
+    const id = e.target.closest('[data-id]').dataset.id;
+    setSelectedVehicleType((prevSelected) => (prevSelected === id ? '' : id));
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = () => {
     dispatch(updateFilterEquipment(selectedEquipment));
     dispatch(updateFilterVehicleType(selectedVehicleType));
-    console.log('Equipment >>>', selectedEquipment);
-    console.log('Type >>>', selectedVehicleType);
+    dispatch(updateFilterLocation(selectedLocation));
+  };
+
+  const toggleLocation = (e) => {
+    const city = e.target.value;
+    setSelectedLocation(city);
+  };
+
+  const clearFilters = () => {
+    setSelectedEquipment([]);
+    setSelectedVehicleType('');
+    setSelectedLocation('');
+    dispatch(clearStateFilters());
   };
 
   return (
     <div className={css.filterWrapper}>
       <p className={css.subTitle}>Location</p>
-      <div className={css.input}>Kyiv, Ukraine</div>
+      <Select
+        h="56px"
+        bg="#F7F7F7"
+        mb="32px"
+        icon={<Icon as={GrLocation} width="16px" height="16px" />}
+        placeholder="Select location"
+        onChange={toggleLocation}
+        value={selectedLocation}
+      >
+        {locationOptions.map(({ location, city }) => (
+          <option key={nanoid()} value={city}>
+            {location}
+          </option>
+        ))}
+      </Select>
       <p className={css.subTitle}>Filters</p>
       <h3 className={css.title}>Vehicle equipment</h3>
       <Divider mb="24px" mt="24px" />
@@ -50,9 +88,9 @@ export const Filters = () => {
             key={option.label}
             svgName={option.svgName}
             label={option.label}
-            data-id={option.dataId}
-            selected={selectedEquipment.includes(option.label)}
-            onClick={() => toggleEquipment(option.label)}
+            dataId={option.dataId}
+            selected={selectedEquipment.includes(option.dataId)}
+            onClick={toggleEquipment}
           />
         ))}
       </div>
@@ -64,32 +102,22 @@ export const Filters = () => {
             key={option.label}
             svgName={option.svgName}
             label={option.label}
-            selected={selectedVehicleType.includes(option.label)}
-            onClick={() => toggleVehicleType(option.label)}
+            dataId={option.dataId}
+            selected={selectedVehicleType === option.dataId}
+            onClick={toggleVehicleType}
           />
         ))}
       </div>
-
-      <Button onClick={handleSearch}>Search</Button>
+      <div className={css.btnWrapper}>
+        <Button onClick={handleSearch}>Search</Button>
+        <IconButton
+          aria-label="Search database"
+          icon={<LuFilterX />}
+          isRound={true}
+          className={css.btnClear}
+          onClick={clearFilters}
+        />
+      </div>
     </div>
   );
 };
-
-//   "airConditioner": 1,
-//   "kitchen": 1,
-//   "TV": 1,
-//   "shower": 1,
-//   "CD": 1,
-//   "bathroom": 1,
-//   "beds": 3,
-//   "radio": 1,
-//   "toilet": 1,
-//   "freezer": 1,
-
-//   "hob": 3,
-//   "microwave": 1,
-
-// type:
-// panelTruck
-// fullyIntegrated
-// alcove",

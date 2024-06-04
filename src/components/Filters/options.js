@@ -4,14 +4,14 @@ export const equipmentOptions = [
   { svgName: 'kitchen', label: 'Kitchen', dataId: 'kitchen' },
   { svgName: 'TV', label: 'TV', dataId: 'TV' },
   { svgName: 'shower', label: 'Shower/WC', dataId: 'shower' },
-  { svgName: '', label: 'CD', dataId: 'CD' },
-  { svgName: '', label: 'Bathroom', dataId: 'bathroom' },
-  { svgName: '', label: 'Beds', dataId: 'beds' },
-  { svgName: '', label: 'Radio', dataId: 'radio' },
-  { svgName: '', label: 'Toilet', dataId: 'toilet' },
-  { svgName: '', label: 'Freezer', dataId: 'freezer' },
-  { svgName: '', label: 'Hob', dataId: 'hob' },
-  { svgName: '', label: 'Microwave', dataId: 'microwave' },
+  { svgName: 'CD', label: 'CD', dataId: 'CD' },
+  { svgName: 'bathroom', label: 'Bathroom', dataId: 'bathroom' },
+  { svgName: 'beds', label: 'Beds', dataId: 'beds' },
+  { svgName: 'radio', label: 'Radio', dataId: 'radio' },
+  { svgName: 'toilet', label: 'Toilet', dataId: 'toilet' },
+  { svgName: 'freezer', label: 'Freezer', dataId: 'freezer' },
+  { svgName: 'hob', label: 'Hob', dataId: 'hob' },
+  { svgName: 'microwave', label: 'Microwave', dataId: 'microwave' },
 ];
 
 export const vehicleTypeOptions = [
@@ -21,13 +21,11 @@ export const vehicleTypeOptions = [
 ];
 
 export const locationOptions = [
-  {
-    Kyiv: 'Ukraine, Kyiv',
-    Poltava: 'Ukraine, Poltava',
-    Dnipro: 'Ukraine, Dnipro',
-    Odesa: 'Ukraine, Odesa',
-    Kharkiv: 'Ukraine, Kharkiv',
-    Sumy: 'Ukraine, Sumy',
-    Lviv: 'Ukraine, Lviv',
-  },
+  { location: 'Ukraine, Kyiv', city: 'Kyiv' },
+  { location: 'Ukraine, Poltava', city: 'Poltava' },
+  { location: 'Ukraine, Dnipro', city: 'Dnipro' },
+  { location: 'Ukraine, Odesa', city: 'Odesa' },
+  { location: 'Ukraine, Kharkiv', city: 'Kharkiv' },
+  { location: 'Ukraine, Sumy', city: 'Sumy' },
+  { location: 'Ukraine, Lviv', city: 'Lviv' },
 ];

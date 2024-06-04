@@ -26,16 +26,22 @@ export const selectFilteredContacts = (store) => {
 };
 
 export const selectFilteredAdverts = (state) => {
-  const { campers, filterEquipment, filterVehicleType } = state.adverts;
-  let filteredAdverts = campers;
-  console.log('filterEquipment>>>', filterEquipment);
-  console.log('filterVehicleType>>>', filterVehicleType);
+  const {
+    advertsAll,
+    filterEquipment,
+    filterVehicleType,
+    campers,
+    filterLocation,
+  } = state.adverts;
+  let filteredAdverts = advertsAll;
 
-  if (!filterEquipment.length ?? !filterVehicleType) {
+  if (!filterEquipment.length && !filterVehicleType && !filterLocation) {
+    console.log('RETURN CAMPERS');
     return campers;
   } else {
-    //перевіряємо чи заданні фільтри для обладнання
+    //filtering quipment
     if (filterEquipment.length) {
+      console.log('EQUIPMENT');
       const filteredByEquipment = (arr, keys) => {
         return arr.filter((obj) => {
           return keys.every((key) => {
@@ -49,13 +55,28 @@ export const selectFilteredAdverts = (state) => {
       ];
     }
 
-    //перевіряємо чи заданні фільтри для типу
+    //filtering Vehicle type
     if (filterVehicleType) {
+      console.log('TYPE!!!!!!!!');
       const filteredByType = (arr, key) => {
         return arr.filter((obj) => obj.form === key);
       };
       //сетаємо значення
       filteredAdverts = [...filteredByType(filteredAdverts, filterVehicleType)];
+    }
+    //filtering Location
+    if (filterLocation) {
+      console.log('LOCATION!!!!!!!!');
+      const filterByLocation = (arr, key) => {
+        return arr.filter((obj) => {
+          const location = obj.location.split(', ');
+          if (location[location.length - 1] === key) {
+            return obj;
+          }
+        });
+      };
+      //сетаємо значення
+      filteredAdverts = [...filterByLocation(filteredAdverts, filterLocation)];
     }
   }
   return filteredAdverts;

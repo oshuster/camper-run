@@ -18,6 +18,7 @@ import { forwardRef } from 'react';
 import { Button } from '../Buttons/MainBtn/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schemas/bookingSchema';
+import './DatePickerStyles.css';
 
 export const BookingForm = () => {
   const {
@@ -96,6 +97,7 @@ export const BookingForm = () => {
                   selected={field.value}
                   dateFormat="dd MMMM yyyy"
                   onChange={(date) => field.onChange(date)}
+                  minDate={new Date()}
                   customInput={<CustomInput />}
                 />
               )}

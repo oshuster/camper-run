@@ -1,5 +1,6 @@
 export const initialState = {
   campers: [],
+  advertsAll: [],
   page: 1,
   favoriteAdverts: [],
   aditionalInfo: {},
@@ -9,4 +10,5 @@ export const initialState = {
   error: null,
   filterEquipment: [],
   filterVehicleType: '',
+  filterLocation: '',
 };
