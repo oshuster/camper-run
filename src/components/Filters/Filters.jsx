@@ -3,24 +3,20 @@ import css from './Filters.module.scss';
 import { useState } from 'react';
 import { FilterButton } from '../FilterButton/FilterButton';
 import { Divider } from '@chakra-ui/react';
-
-const equipmentOptions = [
-  { svgName: 'airConditioner', label: 'AC' },
-  { svgName: 'transmision', label: 'Automatic' },
-  { svgName: 'kitchen', label: 'Kitchen' },
-  { svgName: 'TV', label: 'TV' },
-  { svgName: 'shower', label: 'Shower/WC' },
-];
-
-const vehicleTypeOptions = [
-  { svgName: 'camper1', label: 'Van' },
-  { svgName: 'camper2', label: 'Fully Integrated' },
-  { svgName: 'camper3', label: 'Alcove' },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  updateFilterEquipment,
+  updateFilterVehicleType,
+} from '../../redux/adverts/advertsSlice';
+import { selectFilteredAdverts } from '../../redux/adverts/advertsSelectors';
+import { equipmentOptions, vehicleTypeOptions } from './options';
 
 export const Filters = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([]);
-  const [selectedVehicleType, setSelectedVehicleType] = useState([]);
+  const [selectedVehicleType, setSelectedVehicleType] = useState('');
+  const dispatch = useDispatch();
+  const filteredAdverts = useSelector(selectFilteredAdverts);
+  console.log('filteredAdverts >>>', filteredAdverts);
 
   const toggleEquipment = (label) => {
     setSelectedEquipment((prevSelected) =>
@@ -34,9 +30,11 @@ export const Filters = () => {
     setSelectedVehicleType(label);
   };
 
-  const handleSearch = () => {
-    console.log('Equipment', selectedEquipment);
-    console.log('Type', selectedVehicleType);
+  const handleSearch = (e) => {
+    dispatch(updateFilterEquipment(selectedEquipment));
+    dispatch(updateFilterVehicleType(selectedVehicleType));
+    console.log('Equipment >>>', selectedEquipment);
+    console.log('Type >>>', selectedVehicleType);
   };
 
   return (
@@ -52,6 +50,7 @@ export const Filters = () => {
             key={option.label}
             svgName={option.svgName}
             label={option.label}
+            data-id={option.dataId}
             selected={selectedEquipment.includes(option.label)}
             onClick={() => toggleEquipment(option.label)}
           />
@@ -75,3 +74,22 @@ export const Filters = () => {
     </div>
   );
 };
+
+//   "airConditioner": 1,
+//   "kitchen": 1,
+//   "TV": 1,
+//   "shower": 1,
+//   "CD": 1,
+//   "bathroom": 1,
+//   "beds": 3,
+//   "radio": 1,
+//   "toilet": 1,
+//   "freezer": 1,
+
+//   "hob": 3,
+//   "microwave": 1,
+
+// type:
+// panelTruck
+// fullyIntegrated
+// alcove",

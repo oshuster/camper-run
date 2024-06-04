@@ -25,6 +25,12 @@ const advertsSlice = createSlice({
         (advert) => advert._id !== payload
       );
     },
+    updateFilterEquipment(state, { payload }) {
+      state.filterEquipment = payload;
+    },
+    updateFilterVehicleType(state, { payload }) {
+      state.filterVehicleType = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -62,6 +68,8 @@ export const {
   updateModalState,
   updateShowLoadMore,
   removeFavorite,
+  updateFilterVehicleType,
+  updateFilterEquipment,
 } = advertsSlice.actions;
 
 export const advertReducer = advertsSlice.reducer;

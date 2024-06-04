@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CamperCard } from '../CamperCard/CamperCard';
 import {
   selectAllAdverts,
+  selectFilteredAdverts,
   selectIsLoading,
   selectIsShowLoadMore,
   selectPage,
@@ -14,7 +15,8 @@ import { useEffect } from 'react';
 import Loader from '../Loader/Loader';
 
 export const CamperList = () => {
-  const adverts = useSelector(selectAllAdverts);
+  // const adverts = useSelector(selectAllAdverts);
+  const adverts = useSelector(selectFilteredAdverts);
   const page = useSelector(selectPage);
   const isLoading = useSelector(selectIsLoading);
   const showLoadMore = useSelector(selectIsShowLoadMore);

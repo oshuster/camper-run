@@ -7,4 +7,6 @@ export const initialState = {
   isShowLoadMore: true,
   isOpen: false,
   error: null,
+  filterEquipment: [],
+  filterVehicleType: '',
 };
