@@ -11,9 +11,20 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { NavLink as RouterNavLink } from 'react-router-dom';
+import { NavLink } from './NavLink/NavLink';
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/catalog', label: 'Catalog' },
+    { to: '/favorites', label: 'Favorites' },
+  ];
+
+  const navigationLinks = navLinks.map((link) => (
+    <NavLink key={link.to} to={link.to} label={link.label} />
+  ));
 
   return (
     <Box bg={useColorModeValue('white', 'gray.800')} px={4} boxShadow="md">
@@ -41,81 +52,14 @@ export const Header = () => {
           flex={1}
           display={{ base: 'none', md: 'flex' }}
         >
-          <Link
-            as={RouterNavLink}
-            to="/"
-            px={2}
-            py={1}
-            rounded={'md'}
-            fontSize="xl"
-            _hover={{ textDecoration: 'none', color: '#d84343' }}
-            _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
-          >
-            Home
-          </Link>
-          <Link
-            as={RouterNavLink}
-            to="/catalog"
-            px={2}
-            py={1}
-            rounded={'md'}
-            fontSize="xl"
-            _hover={{ textDecoration: 'none', color: 'gray.700' }}
-            _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
-          >
-            Catalog
-          </Link>
-          <Link
-            as={RouterNavLink}
-            to="/favorites"
-            px={2}
-            py={1}
-            rounded={'md'}
-            fontSize="xl"
-            _hover={{ textDecoration: 'none', color: 'gray.700' }}
-            _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
-          >
-            Favorites
-          </Link>
+          {navigationLinks}
         </HStack>
       </Flex>
 
       {isOpen ? (
         <Box pb={4} display={{ md: 'none' }}>
           <Stack as={'nav'} spacing={4}>
-            <Link
-              as={RouterNavLink}
-              to="/"
-              px={2}
-              py={1}
-              rounded={'md'}
-              _hover={{ textDecoration: 'none', color: '#d84343' }}
-              _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
-            >
-              Home
-            </Link>
-            <Link
-              as={RouterNavLink}
-              to="/catalog"
-              px={2}
-              py={1}
-              rounded={'md'}
-              _hover={{ textDecoration: 'none', color: 'gray.700' }}
-              _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
-            >
-              Catalog
-            </Link>
-            <Link
-              as={RouterNavLink}
-              to="/favorites"
-              px={2}
-              py={1}
-              rounded={'md'}
-              _hover={{ textDecoration: 'none', color: 'gray.700' }}
-              _activeLink={{ color: '#d84343', fontWeight: 'bold' }}
-            >
-              Favorites
-            </Link>
+            {navigationLinks}
           </Stack>
         </Box>
       ) : null}

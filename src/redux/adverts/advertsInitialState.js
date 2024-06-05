@@ -1,6 +1,6 @@
 export const initialState = {
   campers: [],
-  advertsAll: [],
+  filteredCampers: [],
   page: 1,
   favoriteAdverts: [],
   aditionalInfo: {},

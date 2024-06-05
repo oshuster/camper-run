@@ -3,7 +3,7 @@ import css from './NothingFound.module.scss';
 
 export const NothingFound = () => {
   return (
-    <div className={css.container}>
+    <div className={css.nothingFoundContainer}>
       <TfiHeartBroken className={css.icon} />
       <p className={css.title}>За вашим запитом нічого не знайдено 😢</p>
     </div>

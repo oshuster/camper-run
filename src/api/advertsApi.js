@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { makeQueryString } from '../helpers/makeQuery';
 
 const BASE_URL = 'https://6659b114de346625136d8a21.mockapi.io/api';
 
@@ -21,5 +22,11 @@ export const getAdvertById = async (id) => {
 
 export const getAdvertsAll = async () => {
   const { data } = await instance.get(`/adverts`);
+  return data;
+};
+
+export const getFilteredAdverts = async (queryObj) => {
+  const query = makeQueryString(queryObj);
+  const { data } = await instance.get(`/adverts?${query}`);
   return data;
 };

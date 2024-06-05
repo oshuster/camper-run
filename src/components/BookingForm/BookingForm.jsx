@@ -6,19 +6,17 @@ import {
   Textarea,
   VStack,
   Text,
-  InputGroup,
-  InputRightElement,
 } from '@chakra-ui/react';
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import css from './BookingForm.module.scss';
-import svg from '../../assets/sprite.svg';
-import { forwardRef } from 'react';
 import { Button } from '../Buttons/MainBtn/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schemas/bookingSchema';
 import './DatePickerStyles.css';
+import { Notify } from 'notiflix';
+import { CustomInput } from './CustomInput/CustomInput';
 
 export const BookingForm = () => {
   const {
@@ -31,26 +29,8 @@ export const BookingForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const CustomInput = forwardRef((props, ref) => (
-    <InputGroup>
-      <Input
-        placeholder="Booking date"
-        ref={ref}
-        {...props}
-        h="56px"
-        bg="#F2F4F7"
-      />
-      <InputRightElement>
-        <svg className={css.icon} width="20px" height="20px">
-          <use xlinkHref={`${svg}#calendar`} />
-        </svg>
-      </InputRightElement>
-    </InputGroup>
-  ));
-
-  CustomInput.displayName = 'CustomInput';
-
   const onSubmit = (data) => {
+    Notify.success('Бронювання успішне! Очікуйте на дзвінок менеджера');
     console.log(data);
     reset();
   };
@@ -116,7 +96,7 @@ export const BookingForm = () => {
               {...register('comment')}
             />
           </FormControl>
-          <Button>Send</Button>
+          <Button type="submit">Send</Button>
         </VStack>
       </form>
     </Box>

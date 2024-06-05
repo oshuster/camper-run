@@ -5,6 +5,7 @@ import css from './CatalogPage.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearAdverts,
+  clearStateFilters,
   updateModalState,
   updateShowLoadMore,
 } from '../../redux/adverts/advertsSlice';
@@ -22,6 +23,7 @@ export const CatalogPage = () => {
     return () => {
       dispatch(clearAdverts());
       dispatch(updateShowLoadMore(true));
+      dispatch(clearStateFilters());
     };
   }, [dispatch]);
 
@@ -30,7 +32,7 @@ export const CatalogPage = () => {
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={css.catalogWrapper}>
       {open && <PopUpDetails isOpen={open} onClose={closeModal} />}
       <div>
         <Filters />

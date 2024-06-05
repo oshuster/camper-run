@@ -2,13 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getAdvertById,
   getAdvertsAll,
+  getFilteredAdverts,
   getPartialAdverts,
 } from '../../api/advertsApi';
 import { updateShowLoadMore } from './advertsSlice';
 
 export const getAdverts = createAsyncThunk(
   'adverts/getPartial',
-  async (page, { rejectWithValue, dispatch }) => {
+  async (page = 1, { rejectWithValue, dispatch }) => {
     try {
       const response = await getPartialAdverts(page);
       if (response.length < 4) {
@@ -56,6 +57,19 @@ export const addFavorite = createAsyncThunk(
       return response;
     } catch (error) {
       console.log(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getFiltered = createAsyncThunk(
+  'adverts/getFiltered',
+  async (queryObj, { rejectWithValue }) => {
+    try {
+      const response = await getFilteredAdverts(queryObj);
+      return response;
+    } catch (error) {
+      console.log(error.response.statusText);
       return rejectWithValue(error.message);
     }
   }

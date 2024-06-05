@@ -12,36 +12,15 @@ export const selectAditionalInfo = (state) => state.adverts.aditionalInfo;
 
 export const selectFavorite = (state) => state.adverts.favoriteAdverts;
 
-export const selectFilteredContacts = (store) => {
-  const { contacts, filter } = store;
-  if (!filter) {
-    return contacts.items;
-  } else {
-    return contacts.items.filter(
-      (contact) =>
-        contact.name.toLowerCase().includes(filter) ||
-        contact.number.includes(filter)
-    );
-  }
-};
-
 export const selectFilteredAdverts = (state) => {
-  const {
-    advertsAll,
-    filterEquipment,
-    filterVehicleType,
-    campers,
-    filterLocation,
-  } = state.adverts;
-  let filteredAdverts = advertsAll;
+  const { filteredCampers, filterEquipment, campers } = state.adverts;
+  let filteredAdverts = filteredCampers;
 
-  if (!filterEquipment.length && !filterVehicleType && !filterLocation) {
-    console.log('RETURN CAMPERS');
+  if (!filterEquipment.length && !filteredCampers.length) {
     return campers;
   } else {
     //filtering quipment
     if (filterEquipment.length) {
-      console.log('EQUIPMENT');
       const filteredByEquipment = (arr, keys) => {
         return arr.filter((obj) => {
           return keys.every((key) => {
@@ -53,30 +32,6 @@ export const selectFilteredAdverts = (state) => {
       filteredAdverts = [
         ...filteredByEquipment(filteredAdverts, filterEquipment),
       ];
-    }
-
-    //filtering Vehicle type
-    if (filterVehicleType) {
-      console.log('TYPE!!!!!!!!');
-      const filteredByType = (arr, key) => {
-        return arr.filter((obj) => obj.form === key);
-      };
-      //сетаємо значення
-      filteredAdverts = [...filteredByType(filteredAdverts, filterVehicleType)];
-    }
-    //filtering Location
-    if (filterLocation) {
-      console.log('LOCATION!!!!!!!!');
-      const filterByLocation = (arr, key) => {
-        return arr.filter((obj) => {
-          const location = obj.location.split(', ');
-          if (location[location.length - 1] === key) {
-            return obj;
-          }
-        });
-      };
-      //сетаємо значення
-      filteredAdverts = [...filterByLocation(filteredAdverts, filterLocation)];
     }
   }
   return filteredAdverts;
