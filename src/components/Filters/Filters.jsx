@@ -3,12 +3,12 @@ import css from './Filters.module.scss';
 import { useState } from 'react';
 import { FilterButton } from '../FilterButton/FilterButton';
 import { Divider, Icon, IconButton, Select } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
+  clearAdverts,
   clearStateFilters,
   updateFilterEquipment,
-  updateFilterLocation,
-  updateFilterVehicleType,
+  updateShowLoadMore,
 } from '../../redux/adverts/advertsSlice';
 
 import {
@@ -19,7 +19,7 @@ import {
 import { GrLocation } from 'react-icons/gr';
 import { LuFilterX } from 'react-icons/lu';
 import { nanoid } from 'nanoid';
-import { getFiltered } from '../../redux/adverts/advertsOperations';
+import { getAdverts, getFiltered } from '../../redux/adverts/advertsOperations';
 
 export const Filters = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([]);
@@ -42,16 +42,16 @@ export const Filters = () => {
   };
 
   const handleSearch = () => {
-    // dispatch(updateFilterEquipment(selectedEquipment));
-    // dispatch(updateFilterVehicleType(selectedVehicleType));
-    // dispatch(updateFilterLocation(selectedLocation));
-
     const queryObj = {
       equipment: selectedEquipment,
       location: selectedLocation,
       type: selectedVehicleType,
     };
+
+    dispatch(clearAdverts());
+    dispatch(updateFilterEquipment(selectedEquipment));
     dispatch(getFiltered(queryObj));
+    dispatch(updateShowLoadMore(false));
   };
 
   const toggleLocation = (e) => {
@@ -64,6 +64,8 @@ export const Filters = () => {
     setSelectedVehicleType('');
     setSelectedLocation('');
     dispatch(clearStateFilters());
+    dispatch(clearAdverts());
+    dispatch(getAdverts());
   };
 
   return (

@@ -18,7 +18,7 @@ const advertsSlice = createSlice({
     },
     clearAdverts(state) {
       state.campers = [];
-      state.advertsAll = [];
+      state.filteredCampers = [];
       state.page = 1;
     },
     updateModalState(state, { payload }) {
@@ -60,7 +60,7 @@ const advertsSlice = createSlice({
       //getFiltered
       .addCase(getFiltered.pending, handlePending)
       .addCase(getFiltered.fulfilled, (state, { payload }) => {
-        state.advertsAll = [...state.advertsAll, ...payload];
+        state.filteredCampers = [...state.filteredCampers, ...payload];
         state.error = null;
         state.isLoading = false;
       })
@@ -81,15 +81,7 @@ const advertsSlice = createSlice({
         state.error = null;
         state.isLoading = false;
       })
-      .addCase(addFavorite.rejected, handleRejected)
-      //getAll
-      .addCase(getAll.pending, handlePending)
-      .addCase(getAll.fulfilled, (state, { payload }) => {
-        state.advertsAll = [...state.advertsAll, ...payload];
-        state.error = null;
-        state.isLoading = false;
-      })
-      .addCase(getAll.rejected, handleRejected);
+      .addCase(addFavorite.rejected, handleRejected);
   },
 });
 

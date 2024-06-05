@@ -27,7 +27,7 @@ export const Fotter = () => {
         <div className={css.footerContact}>
           <h4>Контакти</h4>
           <p>Телефон: +380 12 345 6789</p>
-          <p>Email: info@motorhomes.com</p>
+          <p>Email: info@camperrun.com</p>
           <p>Адреса: вул. Прикладна, 123, Київ, Україна</p>
         </div>
         <div className={css.footerSocial}>
@@ -67,7 +67,7 @@ export const Fotter = () => {
         </div>
       </div>
       <div className={css.footerBottom}>
-        <p>&copy; 2024 Motorhomes. Всі права захищені.</p>
+        <p>&copy; 2024 Camperrun. Всі права захищені.</p>
       </div>
     </footer>
   );

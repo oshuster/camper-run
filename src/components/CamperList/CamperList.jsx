@@ -32,6 +32,8 @@ export const CamperList = () => {
     dispatch(updatePage(nexPage));
   };
 
+  console.log(adverts);
+
   return (
     <div className={css.advertsWrapper}>
       <ul>

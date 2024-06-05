@@ -25,10 +25,9 @@ export const getAdvertsAll = async () => {
   return data;
 };
 
-export const getFilteredAdverts = async (page = 1, queryObj) => {
+export const getFilteredAdverts = async (queryObj) => {
   const query = makeQueryString(queryObj);
-  const { data } = await instance.get(
-    `/adverts?page=${page}&limit=${LIMIT}&${query}`
-  );
+  console.log(query);
+  const { data } = await instance.get(`/adverts?${query}`);
   return data;
 };

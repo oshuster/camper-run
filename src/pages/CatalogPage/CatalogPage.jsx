@@ -30,7 +30,7 @@ export const CatalogPage = () => {
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={css.catalogWrapper}>
       {open && <PopUpDetails isOpen={open} onClose={closeModal} />}
       <div>
         <Filters />

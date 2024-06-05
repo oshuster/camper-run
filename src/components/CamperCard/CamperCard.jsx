@@ -47,7 +47,6 @@ export const CamperCard = ({ data }) => {
             aria-label="Add to favorite"
             icon={
               <svg width="18px" height="18px">
-                {/* <use xlinkHref={`${svg}#heart_fill`} /> */}
                 <use
                   xlinkHref={
                     isFav(favoriteAdv, data._id)

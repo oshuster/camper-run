@@ -12,30 +12,17 @@ export const selectAditionalInfo = (state) => state.adverts.aditionalInfo;
 
 export const selectFavorite = (state) => state.adverts.favoriteAdverts;
 
-export const selectFilteredContacts = (store) => {
-  const { contacts, filter } = store;
-  if (!filter) {
-    return contacts.items;
-  } else {
-    return contacts.items.filter(
-      (contact) =>
-        contact.name.toLowerCase().includes(filter) ||
-        contact.number.includes(filter)
-    );
-  }
-};
-
 export const selectFilteredAdverts = (state) => {
   const {
-    advertsAll,
+    filteredCampers,
     filterEquipment,
     filterVehicleType,
     campers,
     filterLocation,
   } = state.adverts;
-  let filteredAdverts = advertsAll;
+  let filteredAdverts = filteredCampers;
 
-  if (!filterEquipment.length && !filterVehicleType && !filterLocation) {
+  if (!filterEquipment.length && !filteredCampers.length) {
     console.log('RETURN CAMPERS');
     return campers;
   } else {
@@ -57,7 +44,7 @@ export const selectFilteredAdverts = (state) => {
 
     //filtering Vehicle type
     if (filterVehicleType) {
-      console.log('TYPE!!!!!!!!');
+      console.log('TYPE');
       const filteredByType = (arr, key) => {
         return arr.filter((obj) => obj.form === key);
       };
@@ -66,7 +53,7 @@ export const selectFilteredAdverts = (state) => {
     }
     //filtering Location
     if (filterLocation) {
-      console.log('LOCATION!!!!!!!!');
+      console.log('LOCATION');
       const filterByLocation = (arr, key) => {
         return arr.filter((obj) => {
           const location = obj.location.split(', ');

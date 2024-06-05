@@ -9,7 +9,7 @@ import { selectAditionalInfo } from '../../redux/adverts/advertsSelectors';
 export const FuaturesTab = () => {
   const data = useSelector(selectAditionalInfo);
   return (
-    <div className={css.container}>
+    <div className={css.futureTabContainer}>
       <div className={css.holder}>
         <BageList data={data} />
         <h3 className={css.title}>Vehicle details</h3>

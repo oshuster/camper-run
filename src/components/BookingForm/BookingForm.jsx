@@ -19,6 +19,7 @@ import { Button } from '../Buttons/MainBtn/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../schemas/bookingSchema';
 import './DatePickerStyles.css';
+import { Notify } from 'notiflix';
 
 export const BookingForm = () => {
   const {
@@ -40,7 +41,7 @@ export const BookingForm = () => {
         h="56px"
         bg="#F2F4F7"
       />
-      <InputRightElement>
+      <InputRightElement height="100%">
         <svg className={css.icon} width="20px" height="20px">
           <use xlinkHref={`${svg}#calendar`} />
         </svg>
@@ -51,6 +52,7 @@ export const BookingForm = () => {
   CustomInput.displayName = 'CustomInput';
 
   const onSubmit = (data) => {
+    Notify.success('Бронювання успішне! Очікуйте на дзвінок менеджера');
     console.log(data);
     reset();
   };

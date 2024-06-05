@@ -13,6 +13,11 @@
     width: 95px;
 }
 
+.button:hover {
+    border-color: #ff5a5f;
+    background-color: #e0e0e01a;
+}
+
 .button svg {
     margin-bottom: 5px;
 }
