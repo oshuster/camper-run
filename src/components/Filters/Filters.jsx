@@ -66,6 +66,7 @@ export const Filters = () => {
     dispatch(clearStateFilters());
     dispatch(clearAdverts());
     dispatch(getAdverts());
+    dispatch(updateShowLoadMore(true));
   };
 
   return (
