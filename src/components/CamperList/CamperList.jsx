@@ -10,7 +10,7 @@ import {
 import { getAdverts } from '../../redux/adverts/advertsOperations';
 import { updatePage } from '../../redux/adverts/advertsSlice';
 import { LoadMoreBtn } from '../Buttons/LoadMoreBtn/LoadMoreBtn';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import Loader from '../Loader/Loader';
 import { NothingFound } from '../NothingFound/NothingFound';
 
@@ -26,18 +26,16 @@ export const CamperList = () => {
     dispatch(getAdverts(page));
   }, [page, dispatch]);
 
-  const loadMore = async () => {
-    if (isLoading) return;
-    const nexPage = page + 1;
-    dispatch(updatePage(nexPage));
-  };
-
-  console.log(adverts);
+  const loadMore = useCallback(() => {
+    if (!isLoading) {
+      dispatch(updatePage(page + 1));
+    }
+  }, [isLoading, page, dispatch]);
 
   return (
     <div className={css.advertsWrapper}>
       <ul>
-        {adverts?.map((item) => (
+        {adverts.map((item) => (
           <CamperCard data={item} key={item._id} />
         ))}
       </ul>

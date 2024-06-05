@@ -12,13 +12,16 @@ export const FavoriteList = () => {
   const favoriteAdv = useSelector(selectFavorite);
   const isLoading = useSelector(selectIsLoading);
 
+  const hasFavorites = favoriteAdv.length > 0;
+
   return (
     <div className={css.favoriteListWrapper}>
-      {favoriteAdv.length === 0 && <NothingFound />}
+      {!hasFavorites && !isLoading && <NothingFound />}
       <ul>
-        {favoriteAdv?.map((item) => (
-          <FavoriteCard data={item} key={item._id} />
-        ))}
+        {hasFavorites &&
+          favoriteAdv.map((item) => (
+            <FavoriteCard data={item} key={item._id} />
+          ))}
       </ul>
       {isLoading && <Loader />}
     </div>

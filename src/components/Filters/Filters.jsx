@@ -118,7 +118,7 @@ export const Filters = () => {
       <div className={css.btnWrapper}>
         <Button onClick={handleSearch}>Search</Button>
         <IconButton
-          aria-label="Search database"
+          aria-label="Clear filters"
           icon={<LuFilterX />}
           isRound={true}
           className={css.btnClear}

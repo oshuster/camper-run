@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import css from './Fotter.module.scss';
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { navLinks, socialLinks } from './links';
 
 export const Fotter = () => {
   return (
@@ -16,12 +16,11 @@ export const Fotter = () => {
         <div className={css.footerLinks}>
           <h4>Корисні посилання</h4>
           <ul>
-            <li>
-              <Link to="/">Головна</Link>
-            </li>
-            <li>
-              <Link to="/catalog">Каталог</Link>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to}>{link.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className={css.footerContact}>
@@ -32,38 +31,19 @@ export const Fotter = () => {
         </div>
         <div className={css.footerSocial}>
           <h4>Ми в соцмережах</h4>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.facebook.com/"
-          >
-            <FaFacebook
-              style={{ marginTop: '15px', color: 'white', fontSize: '1.5em' }}
-            />
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://x.com/">
-            <FaTwitter
-              style={{ marginTop: '15px', color: '#0999d6', fontSize: '1.5em' }}
-            />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.instagram.com/"
-          >
-            <FaInstagram
-              style={{ marginTop: '15px', color: 'white', fontSize: '1.5em' }}
-            />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.youtube.com/"
-          >
-            <FaYoutube
-              style={{ marginTop: '15px', color: 'red', fontSize: '1.5em' }}
-            />
-          </a>
+          {socialLinks.map((social, index) => (
+            <a
+              key={index}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={social.href}
+            >
+              <social.icon
+                className={css.socialIcon}
+                style={{ color: social.color }}
+              />
+            </a>
+          ))}
         </div>
       </div>
       <div className={css.footerBottom}>

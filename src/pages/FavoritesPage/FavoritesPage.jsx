@@ -16,9 +16,7 @@ export const FavoritesPage = () => {
   const closeModal = () => {
     dispatch(updateModalState(false));
   };
-  console.log(favorite.length);
   return (
-    // <div className={css.favoriteWrapper}>
     <div
       className={
         favorite.length > 0 ? css.favoriteWrapper : css.extendFavoriteWrapper

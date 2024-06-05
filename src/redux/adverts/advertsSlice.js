@@ -3,7 +3,6 @@ import {
   getAdverts,
   getOne,
   addFavorite,
-  getAll,
   getFiltered,
 } from './advertsOperations';
 import { initialState } from './advertsInitialState';

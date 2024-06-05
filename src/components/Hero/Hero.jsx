@@ -7,9 +7,9 @@ export const Hero = () => {
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
-    console.log('click');
     navigate('/catalog');
   };
+
   return (
     <Box
       display="flex"
@@ -44,7 +44,9 @@ export const Hero = () => {
             Camperrun: Світ чекає – сідай за кермо!
           </Highlight>
         </Heading>
-        <Button onClick={handleSearchClick}>Search</Button>
+        <Button aria-label="Search Button" onClick={handleSearchClick}>
+          Search
+        </Button>
       </Box>
     </Box>
   );
