@@ -28,4 +28,5 @@ export const locationOptions = [
   { location: 'Ukraine, Kharkiv', city: 'Kharkiv' },
   { location: 'Ukraine, Sumy', city: 'Sumy' },
   { location: 'Ukraine, Lviv', city: 'Lviv' },
+  { location: 'Ukraine, Rivne', city: 'Rivne' },
 ];

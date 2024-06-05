@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAdverts, getOne, addFavorite, getAll } from './advertsOperations';
+import {
+  getAdverts,
+  getOne,
+  addFavorite,
+  getAll,
+  getFiltered,
+} from './advertsOperations';
 import { initialState } from './advertsInitialState';
 import { handlePending, handleRejected } from './advertsHandlers';
 
@@ -12,6 +18,7 @@ const advertsSlice = createSlice({
     },
     clearAdverts(state) {
       state.campers = [];
+      state.advertsAll = [];
       state.page = 1;
     },
     updateModalState(state, { payload }) {
@@ -50,6 +57,14 @@ const advertsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getAdverts.rejected, handleRejected)
+      //getFiltered
+      .addCase(getFiltered.pending, handlePending)
+      .addCase(getFiltered.fulfilled, (state, { payload }) => {
+        state.advertsAll = [...state.advertsAll, ...payload];
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(getFiltered.rejected, handleRejected)
       //getOne
       .addCase(getOne.pending, handlePending)
       .addCase(getOne.fulfilled, (state, { payload }) => {

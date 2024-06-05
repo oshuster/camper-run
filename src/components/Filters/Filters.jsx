@@ -10,7 +10,7 @@ import {
   updateFilterLocation,
   updateFilterVehicleType,
 } from '../../redux/adverts/advertsSlice';
-import { selectFilteredAdverts } from '../../redux/adverts/advertsSelectors';
+
 import {
   equipmentOptions,
   vehicleTypeOptions,
@@ -19,18 +19,16 @@ import {
 import { GrLocation } from 'react-icons/gr';
 import { LuFilterX } from 'react-icons/lu';
 import { nanoid } from 'nanoid';
+import { getFiltered } from '../../redux/adverts/advertsOperations';
 
 export const Filters = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([]);
   const [selectedVehicleType, setSelectedVehicleType] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
   const dispatch = useDispatch();
-  const filteredAdverts = useSelector(selectFilteredAdverts);
-  console.log('filteredAdverts >>>', filteredAdverts);
 
   const toggleEquipment = (e) => {
     const id = e.target.closest('[data-id]').dataset.id;
-    console.log(id);
     setSelectedEquipment((prevSelected) =>
       prevSelected.includes(id)
         ? prevSelected.filter((item) => item !== id)
@@ -44,9 +42,16 @@ export const Filters = () => {
   };
 
   const handleSearch = () => {
-    dispatch(updateFilterEquipment(selectedEquipment));
-    dispatch(updateFilterVehicleType(selectedVehicleType));
-    dispatch(updateFilterLocation(selectedLocation));
+    // dispatch(updateFilterEquipment(selectedEquipment));
+    // dispatch(updateFilterVehicleType(selectedVehicleType));
+    // dispatch(updateFilterLocation(selectedLocation));
+
+    const queryObj = {
+      equipment: selectedEquipment,
+      location: selectedLocation,
+      type: selectedVehicleType,
+    };
+    dispatch(getFiltered(queryObj));
   };
 
   const toggleLocation = (e) => {
@@ -73,8 +78,8 @@ export const Filters = () => {
         onChange={toggleLocation}
         value={selectedLocation}
       >
-        {locationOptions.map(({ location, city }) => (
-          <option key={nanoid()} value={city}>
+        {locationOptions.map(({ location }) => (
+          <option key={nanoid()} value={location}>
             {location}
           </option>
         ))}
